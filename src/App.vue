@@ -1,8 +1,11 @@
 <script>
+// dichiarazione di axios
 import axios from 'axios';
 
 import AppTitle from './components/AppTitle.vue'
 
+import AppFilmList from './components/AppFilmList.vue'
+// dichiarazione di store
 import {store} from './components/store.js'
 export default{
   data(){
@@ -12,6 +15,7 @@ export default{
   },
     components:{
       AppTitle,
+      AppFilmList,
       
   },
   created(){
@@ -48,10 +52,22 @@ export default{
 </script>
 
 <template>
-  <AppTitle @RicercaPulsante="ChiamataApy"></AppTitle>
+  <div id="container_totale">
+    <AppTitle @RicercaPulsante="ChiamataApy"></AppTitle>
+    <AppFilmList></AppFilmList>
+  </div> 
+  
 
 </template>
 
 <style lang="scss">
+#container_totale{
+  
+  margin:  20px auto;
+  max-width: 1400px;
+
+
+  
+}
 
 </style>

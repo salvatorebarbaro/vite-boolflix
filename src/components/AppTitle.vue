@@ -46,14 +46,18 @@ export default{
 </template>
 
 <style lang="scss">
+@use '../components/style/variables.scss' as *;
 #Container_title{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1400px;
-  margin: 0 auto;
-  background-color: #1c1c1c;
+  // temporanea
+  max-width: $misura;
+  // temporanea
+  // margin: 0 auto;
+  background-color: $colore_sfondo;
   padding: 15px;
+  border: 1px solid darkgray;
   h1{
     text-transform: uppercase;
     font-size: 40px;
