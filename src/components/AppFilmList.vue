@@ -10,8 +10,6 @@ export default{
     return{
       store,
       
-      
-      
 
     }
   },
@@ -25,6 +23,8 @@ export default{
   },
 
   methods: {
+
+
     
     
   },
