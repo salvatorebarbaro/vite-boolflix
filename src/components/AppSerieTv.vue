@@ -6,7 +6,7 @@ import {store} from '../components/store.js'
 import axios from 'axios';
 
 export default{
-  name:'AppElementItems',
+  name:'AppSerieTv',
   data(){
     return{
       store,
@@ -33,9 +33,13 @@ export default{
                 const map={
                   "en":"gb-eng",
                   "ja":"jp",
+                  "zh":"cn",
+                  "hi":"in",
+                  "ko":"kr",
+                  "zh":"cn"
                 }
                 // questa linea di codice controlla se la lingua originale della card è mappata in map. Se sì, restituisce il valore mappato, altrimenti restituisce la lingua originale della card stessa essendoci l'operatore or.
-                return map[this.card.original_language] || this.card.original_language;
+                return map[this.serie.original_language] || this.serie.original_language;
                 },
 
               bandiera(){
@@ -51,7 +55,7 @@ export default{
     
   
 props:{
-    card:Object,
+    serie:Object,
   }
 }
 
@@ -62,14 +66,14 @@ props:{
 <template>
     <li id="Card_films">
         <!-- inseriamo dinamicamente gli elementi che vogliamo -->
-        <div id="titolo">Titolo: {{ card.title }}</div>
-        <div id="titolo_originale">Titolo Originale: {{ card.original_title }}</div>
+        <div id="titolo">Titolo: {{ serie.name }}</div>
+        <div id="titolo_originale">Titolo Originale: {{ serie.original_title }}</div>
 <!-- Lingua: {{ card.original_language }} -->
         <div id="lingua">
           <img :src="flagurl" alt="bandiera lingua">
         </div>
 
-        <div id="voto">Voto: {{ card.vote_average }}</div>
+        <div id="voto">Voto: {{ serie.vote_average }}</div>
         <!-- per commentare questa sezione , quindi io passando le props dell'oggetto card insomma mi trovo all'interno di ogni elemento dell'array cosi da poterlo gestire in modo dinamico molto -->
     </li>
     

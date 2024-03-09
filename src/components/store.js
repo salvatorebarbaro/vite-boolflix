@@ -5,6 +5,8 @@ export const store = reactive({
     // in questo caso avremo films che è l'array vuoto delli nostri film
     films:[],
 
+    Serie_tv:[],
+
     inputvalue: '',
 
 })

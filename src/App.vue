@@ -30,14 +30,29 @@ export default{
       .then(res =>{
         // cerco il percorso giusto per array di film
         
-        console.log('film',res.data.results)
+        // console.log('film',res.data.results)
         
         // lo salvo all'interno di un array di oggetti
         
         
         this.store.films=res.data.results
 
-        console.log(this.store.films)
+        // console.log(this.store.films)
+
+
+      })
+      axios.get('https://api.themoviedb.org/3/search/tv?api_key=52d7979549a2ff7c806b67b80cd17c72&query='+ this.store.inputvalue)
+      .then(res =>{
+        // cerco il percorso giusto per array di film
+        
+        console.log('Serie tv',res.data.results)
+        
+        // lo salvo all'interno di un array di oggetti
+        
+        
+        this.store.Serie_tv=res.data.results
+
+        console.log(this.store.Serie_tv)
 
 
       })
