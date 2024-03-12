@@ -28,11 +28,15 @@ export default{
     },
 
   methods: {
-            // tramite questa funzione noi siamo andati a correggere le bandiere che non venivano trovate andano a mappare il risultato
+  // tramite questa funzione noi siamo andati a correggere le bandiere che non venivano trovate andano a mappare il risultato
               mappatura(){
                 const map={
                   "en":"gb-eng",
                   "ja":"jp",
+                  "zh":"cn",
+                  "hi":"in",
+                  "ko":"kr",
+                  "zh":"cn"
                 }
                 // questa linea di codice controlla se la lingua originale della card è mappata in map. Se sì, restituisce il valore mappato, altrimenti restituisce la lingua originale della card stessa essendoci l'operatore or.
                 return map[this.card.original_language] || this.card.original_language;
@@ -46,7 +50,33 @@ export default{
                 .then(res =>{
                     this.flagurl=`https://flagcdn.com/24x18/${languagecorrect}.png`;
                 })
+                // gestiamo gli errori
+                .catch(error=>{
+                  // bandiera di default
+                  this.flagurl=`https://flagcdn.com/24x18/ua.png`;
+                })
                             }
+          },
+          // ci siamo dovuti inserire questa sezione che ci permette di inserire i valori che andranno ricalcolati ogni volta perchè dinamici 
+          computed:{
+            voto_medio(){
+          // operatore matematico usato per arrotondare l'operazione al numero più vicino
+          return Math.ceil(this.card.vote_average / 2 );
+          // cosi otteniamo un vodo da 1 a 5 per eccesso
+        },
+         stelle(){
+          // questa funzione andrà a creare un array della lunghezza del nostro voto medio
+          return Array(this.voto_medio).fill('');
+          // tramite fil nooi ogni elemento dell'array lo andremo a riempire con una stringa vuota
+        },
+        Numero_vuote(){
+          // abbiamo ottenuto il numero di stelle da inserire per rappresentare quelle vuote
+          return (5-this.voto_medio); 
+        },
+        Stelle_Vuote(){
+          // creiamo arrey di stelle vuote
+          return Array(this.Numero_vuote).fill('');
+        }
           },
     
   
@@ -64,12 +94,23 @@ props:{
         <!-- inseriamo dinamicamente gli elementi che vogliamo -->
         <div id="titolo">Titolo: {{ card.title }}</div>
         <div id="titolo_originale">Titolo Originale: {{ card.original_title }}</div>
-<!-- Lingua: {{ card.original_language }} -->
+        <div id="immagine_url">link immagine: {{'https://image.tmdb.org/t/p/w342'+card.poster_path }}</div>
+
         <div id="lingua">
           <img :src="flagurl" alt="bandiera lingua">
         </div>
-
-        <div id="voto">Voto: {{ card.vote_average }}</div>
+        <!-- sezione stelle -->
+        <div id="stelle">
+          <div id="stella" v-for="stella in stelle">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div id="stelle_vuote" v-for="stella_vuota in Stelle_Vuote">
+            <i class="fa-regular fa-star"></i>
+          </div>
+          
+        </div>
+        <!-- fine sezione stelle -->
+        
         <!-- per commentare questa sezione , quindi io passando le props dell'oggetto card insomma mi trovo all'interno di ogni elemento dell'array cosi da poterlo gestire in modo dinamico molto -->
     </li>
     
@@ -84,6 +125,11 @@ li{
     padding: 10px;
     width: calc(100% / 5 - $gap_element / 5 * 4);
     align-items: center;
+    #stelle{
+      display: flex;
+      flex-direction: row;
+      gap: 0.2em ;
+    }
     
 }
 
