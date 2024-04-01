@@ -38,14 +38,15 @@ export default{
 
 <template>
     <div id="container_risultati">
-      <div class="sezionefilm">
+      <!-- condizione applicata per far si che l'elemento non si veda finche la sua lunghezza non è maggiore di 0 -->
+      <div class="sezionefilm" v-if="store.films.length > 0">
         <h2>Risultati Film</h2>
         <ul id="container_film">
                 <AppElementItems v-for="currentFilm in store.films" :card="currentFilm"></AppElementItems>
         </ul>
       </div>
-      
-      <div class="sezioneserie">
+      <!-- condizione applicata per far si che l'elemento non si veda finche la sua lunghezza non è maggiore di 0 -->
+      <div class="sezioneserie" v-if="store.Serie_tv.length > 0">
         <h2>Risultati serie tv</h2>
         <ul id="container_Serie_tv">
         <AppSerieTv v-for="currentserie in store.Serie_tv" :serie="currentserie"></AppSerieTv>

@@ -94,7 +94,7 @@ props:{
         <!-- inseriamo dinamicamente gli elementi che vogliamo -->
         <div id="titolo">Titolo: {{ card.title }}</div>
         <div id="titolo_originale">Titolo Originale: {{ card.original_title }}</div>
-        <div id="immagine_url">link immagine: {{'https://image.tmdb.org/t/p/w342'+card.poster_path }}</div>
+        <div id="immagine_url"><img :src="'https://image.tmdb.org/t/p/w342'+card.poster_path" alt=""></div>
 
         <div id="lingua">
           <img :src="flagurl" alt="bandiera lingua">
@@ -117,21 +117,105 @@ props:{
 </template>
 <style lang="scss">
 @use '../components/style/variables.scss' as *;
-li{
-    display: flex;
+
+
+#Card_films{
+  position: relative;
+  width: 200px;
+  height: 300px;
+  
+  
+  #titolo{
+    display: none;
+    
+  }
+  #titolo_originale{
+    display: none;
+    
+  }
+  #lingua{
+    display: none;
+    transition: opacity 0.7 ease-in-out  ;
+    opacity: 0;
+    
+  }
+  #stelle{display: none;}
+  #immagine_url{
+    position: absolute;
+    top: 0;
+    left: 0;
+      opacity: 1;
+      transition: opacity 0.7s ease-in-out;
+      img{
+      padding: 5px;
+      width: 100%; 
+      height: 100%;
+      object-fit: cover;
+      }
+      
+    }
+}
+#Card_films:hover{
+  display: flex;
     flex-direction: column;
     gap: $gap_element;
     border: 1px grey solid;
     padding: 10px;
-    width: calc(100% / 5 - $gap_element / 5 * 4);
+    // width: calc(100% / 5 - $gap_element / 5 * 4);
     align-items: center;
-    #stelle{
-      display: flex;
-      flex-direction: row;
-      gap: 0.2em ;
-    }
-    
+    justify-content: center;
+  #titolo,#titolo_originale,#lingua{
+    display: block;
+    transition-delay: 0.7s ;
+    opacity: 1;
+  }
+  #stelle
+  {
+    display: flex;
+    flex-direction: row;
+    gap: 0.2em ;
+   
+  }
+
+  #immagine_url:hover
+  {
+      opacity: 0;
+      
+  }
 }
+
+
+li:hover{
+  
+	-webkit-animation: flip-horizontal-bottom 0.7s cubic-bezier(0.455, 0.030, 0.515, 0.955) ;
+	        animation: flip-horizontal-bottom 0.7s cubic-bezier(0.455, 0.030, 0.515, 0.955) ;
+
+
+}
+
+ @-webkit-keyframes flip-horizontal-bottom {
+  0% {
+    -webkit-transform: rotateX(0);
+            transform: rotateX(0);
+  }
+  100% {
+    -webkit-transform: rotateX(-180deg);
+            transform: rotateX(-180deg);
+  }
+}
+@keyframes flip-horizontal-bottom {
+  0% {
+    -webkit-transform: rotateX(0);
+            transform: rotateX(0);
+  }
+  100% {
+    -webkit-transform: rotateX(-180deg);
+            transform: rotateX(-180deg);
+  }
+}
+
+
+
 
 
 
